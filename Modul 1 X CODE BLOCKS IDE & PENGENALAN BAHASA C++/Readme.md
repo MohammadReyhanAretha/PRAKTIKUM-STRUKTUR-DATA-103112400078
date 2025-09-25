@@ -2,8 +2,7 @@
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
-
-yang panjang dikit
+Bahasa C++ adalah bahasa pemrograman yang dibuat oleh Bjarne Stroustrup, dikembangkan sebagai versi yang lebih canggih dari bahasa C. Bahasa ini mendukung paradigma pemrograman berorientasi objek, yang membedakannya dari pendahulunya. Dalam praktikum ini, C++ digunakan sebagai bahasa utama. C++ memiliki struktur dasar yang terdiri dari pustaka (#include) dan fungsi main(). Komponen utamanya adalah variabel untuk menyimpan data, konstanta untuk nilai tetap, dan operator untuk melakukan perhitungan atau logika. Interaksi dengan pengguna ditangani oleh cin (input) dan cout (output). Alur program dikendalikan oleh pernyataan kondisional seperti if dan switch untuk pengambilan keputusan , serta perulangan seperti for dan while untuk tugas berulang. Terakhir, struct digunakan untuk mengelompokkan berbagai tipe data yang saling terkait menjadi satu kesatuan
 
 ## Unguided
 
