@@ -178,12 +178,21 @@ int main()
 copy paste soal nomor 1 disini
 
 ```c++
-package main
+#include <iostream>
+using namespace std;
 
-func main() {
-	fmt.Println("Kode kalian disini")
-	fmt.Println("JANGAN MASUKIN >>SCREENSHOT<< KODE KALIAN DISINI")
-	fmt.Println("KALAU ADA -20 POIN LAPRAK")
+int main() {
+   float a, b;
+   cout << "masukkan angka : ";
+   cin >> a;
+   cout << "masukkan angka : ";
+   cin >> b;
+   cout << "penjumlahan : " << a + b << endl;
+   cout << "pengurangan : " << a - b << endl;
+   cout << "perkalian : " << a * b << endl;
+   cout << "pembagian : " << a / b << endl;
+
+    return 0;
 }
 ```
 
