@@ -22,7 +22,11 @@ int main()
     return 0;
 }
 ```
-aku mengerjakan perulangan
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/aritmatika.png)
+
+Program ini bersifat non-interaktif atau statis. Tidak meminta input: Program ini langsung berjalan tanpa memintamu memasukkan angka apa pun. Perhitungan sudah ditentukan Operasi matematikanya (misalnya, z = 5 - 3;) sudah tertulis di dalam kode. Nilainya sudah pasti dan tidak bisa diubah saat program berjalan. Tujuannya biasanya untuk mendemonstrasikan sebuah perhitungan spesifik atau untuk mendapatkan hasil dari sebuah rumus yang nilainya sudah diketahui. Singkatnya, program ini menjalankan perhitungan yang sudah ditetapkan dari awal dan hanya menampilkan hasilnya.
 
 ### Fungsi
 ```c++
@@ -75,7 +79,12 @@ int main()
 }
 
 ```
-aku mengerjakan perulangan
+
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/fungsi.png)
+
+Program ini bertugas untuk menghitung luas dan keliling persegi panjang. Kamu hanya perlu memasukkan nilai panjang dan lebar. Program ini menggunakan "fungsi" terpisah untuk masing-masing perhitungan, sehingga kodenya lebih rapi dan terstruktur.
 
 ### Kondisi
 ```c++
@@ -106,6 +115,12 @@ int main()
 }
 ```
 
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/kondisi.png)
+
+Program ini adalah penentu hari kerja atau hari libur. Kamu memasukkan angka yang mewakili hari (misalnya 1 untuk Senin, 6 untuk Sabtu). Program kemudian akan menggunakan logika if-else atau switch untuk memeriksa angka tersebut dan memberimu output "Hari Kerja" atau "Hari Libur" sesuai aturan yang ditentukan.
+
 ### Perulangan
 ```c++
 int main()
@@ -121,6 +136,12 @@ int main()
     return 0;
 }
 ```
+
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/perulangan.png)
+
+Program ini menunjukkan cara kerja perulangan (looping). Kamu memasukkan sebuah angka (misalnya 5), dan program akan mencetak sebuah kalimat berulang kali, dari angka 2 sampai angka yang kamu masukkan. Ini berguna untuk melakukan tugas yang sama berkali-kali secara otomatis.
 
 ### Struct
 ```c++
@@ -156,6 +177,13 @@ int main() {
 }
 
 ```
+
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/struct.png)
+
+Program ini berfungsi seperti formulir digital untuk data mahasiswa. Kamu akan diminta mengisi: Nama, NIM, IPK, Data tersebut kemudian disimpan dalam sebuah struct, yaitu sebuah "wadah" yang bisa menampung berbagai jenis data yang saling berhubungan. Setelah diisi, program akan menampilkan kembali data yang sudah kamu masukkan.
+
 ### Test
 ```c++
 #include <iostream>
@@ -171,11 +199,17 @@ int main()
 }
 
 ```
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/testcpp.png)
+
+Program ini dirancang untuk membaca satu karakter saja. Walaupun kamu mengetik "Kelapa Muda", program hanya akan mengambil dan menampilkan huruf pertamanya, yaitu 'K'. Ini menunjukkan cara kerja input dasar untuk tipe data karakter (char) di C++
+
 ## Unguided
 
 ### Soal 1
 
-copy paste soal nomor 1 disini
+> ![Screenshot bagian x](SOAL/GSoal1.png)
 
 ```c++
 #include <iostream>
@@ -197,44 +231,103 @@ int main() {
 ```
 
 > Output
-> ![Screenshot bagian x](output/screenshot_soal1.png)
-> %% Untuk mencantumkan screenshot, tidak boleh ada spasi di urlnya `()`, penamaan file bebas asal gak sara dan mudah dipahami aja,, dan jangan lupa hapus komen ini yah%%
+> 
+> ![Screenshot bagian x](OUTPUT/Soal1.png)
 
-Penjelasan ttg kode kalian disini
+Program ini seperti kalkulator dasar. Kamu memasukkan dua angka, lalu program akan otomatis melakukan empat operasi matematika dasar:
+Penjumlahan (+), Pengurangan (-), Perkalian (*), Pembagian (/), Hasil dari setiap operasi kemudian ditampilkan di layar. Program aritmatika.png juga melakukan hal serupa, yaitu menghitung nilai menggunakan operasi matematika dan menampilkan hasilnya.
 
 ### Soal 2
 
-soal nomor 2A
+> ![Screenshot bagian x](SOAL/GSoal3.png)
 
-```go
-package main
+```c++
+#include <iostream>
+#include <string>
 
-func main() {
-	fmt.Println("kode untuk soal nomor 2A")
+using namespace std;
+
+int main() {
+    int angka;
+    string tulisan = "";
+
+    cout << "Masukkan angka (0-100): ";
+    cin >> angka;
+
+    string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"};
+
+    if (angka < 0 || angka > 100) {
+        tulisan = "Input tidak valid. Harap masukkan angka antara 0 dan 100.";
+    } else if (angka == 0) {
+        tulisan = "nol";
+    } else if (angka == 100) {
+        tulisan = "seratus";
+    } else if (angka == 11) {
+        tulisan = "sebelas";
+    } else if (angka < 10) {
+        tulisan = satuan[angka];
+    } else if (angka < 20) {
+        tulisan = satuan[angka % 10] + " belas";
+    } else {
+        int puluhan = angka / 10;
+        int sisa = angka % 10;
+        tulisan = satuan[puluhan] + " puluh " + satuan[sisa];
+    }
+
+    cout << "Output: " << angka << " : " << tulisan << endl;
+
+    return 0;
 }
 ```
 
 > Output
-> ![Screenshot bagian x](output/screenshot_soal2A.png)
+> 
+> ![Screenshot bagian x](OUTPUT/Soal2.png)
 
-penjelasan kode
+Ini adalah program penerjemah angka menjadi tulisan. Kamu memasukkan sebuah angka (contohnya 79), dan program akan mengubahnya menjadi format teks dalam bahasa Indonesia, yaitu "tujuh puluh sembilan".
 
-Kalau adalanjutan di lanjut disini aja
+### Soal 3
 
-soal nomor 2B
+> ![Screenshot bagian x](SOAL/GSoal3.png)
 
-```go
-package main
+```c++
+#include <iostream>
 
-func main() {
-	fmt.Println("kode untuk soal nomor 2B")
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Input: ";
+    cin >> n;
+    cout << "Output:" << endl;
+
+    for (int i = n; i >= 1; i--) {
+        for (int k = 0; k < n - i; k++) {
+            cout << "  ";
+        }
+        for (int j = i; j >= 1; j--) {
+            cout << j << " ";
+        }
+        cout << "* ";
+        for (int j = 1; j <= i; j++) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    for (int k = 0; k < n; k++) {
+        cout << "  ";
+    }
+    cout << "*" << endl;
+
+    return 0;
 }
 ```
 
 > Output
-> ![Screenshot bagian x](output/screenshot_soal2B.png)
+> 
+> ![Screenshot bagian x](OUTPUT/Soal3.png)
 
-penjelasan bedanya sesuai soal
+Program ini adalah contoh kreativitas menggunakan perulangan bersarang (nested loop). Kamu memasukkan satu angka, dan program akan menggunakan angka tersebut sebagai titik awal untuk menggambar pola segitiga simetris yang unik menggunakan angka dan simbol bintang *.
 
 ## Referensi
 
