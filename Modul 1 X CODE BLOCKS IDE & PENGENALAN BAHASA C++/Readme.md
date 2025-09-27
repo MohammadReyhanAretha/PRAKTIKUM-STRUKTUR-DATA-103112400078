@@ -239,7 +239,7 @@ Penjumlahan (+), Pengurangan (-), Perkalian (*), Pembagian (/), Hasil dari setia
 
 ### Soal 2
 
-> ![Screenshot bagian x](SOAL/GSoal3.png)
+> ![Screenshot bagian x](SOAL/GSoal2.png)
 
 ```c++
 #include <iostream>
@@ -289,7 +289,7 @@ Ini adalah program penerjemah angka menjadi tulisan. Kamu memasukkan sebuah angk
 ### Soal 3
 
 > ![Screenshot bagian x](SOAL/GSoal3.png)
-
+> 
 ```c++
 #include <iostream>
 
@@ -331,4 +331,5 @@ Program ini adalah contoh kreativitas menggunakan perulangan bersarang (nested l
 
 ## Referensi
 
-1. https://en.wikipedia.org/wiki/Data_structure (diakses blablabla)
+1. https://www.learncpp.com/ (diakses pada 27 september 2025)
+2. https://www.w3schools.com/cpp/ (diakses pada 27 september 2025)
