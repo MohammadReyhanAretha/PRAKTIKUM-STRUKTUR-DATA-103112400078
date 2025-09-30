@@ -24,7 +24,7 @@
   </tr>
   <tr>
     <td align="right"><b>Class</b></td>
-    <td align="left">IF-12-01</td>
+    <td align="left">IF-12-07</td>
   </tr>
 </table>
 
