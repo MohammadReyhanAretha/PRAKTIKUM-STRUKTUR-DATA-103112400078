@@ -299,7 +299,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Program ini merupakan duplikat fungsional dari guided1.cpp yang juga mendemonstrasikan call by reference. Sebuah fungsi bernama kuadratkan didefinisikan untuk menerima referensi ke sebuah variabel integer angka. Ketika fungsi kuadratkan dipanggil dari main dengan variabel bilangan, fungsi tersebut memodifikasi nilai bilangan secara langsung dengan menghitung kuadratnya, dan perubahan ini bersifat permanen setelah fungsi selesai dieksekusi.
+Program ini merupakan duplikat fungsional dari guided1 yang juga mendemonstrasikan call by reference. Sebuah fungsi bernama kuadratkan didefinisikan untuk menerima referensi ke sebuah variabel integer angka. Ketika fungsi kuadratkan dipanggil dari main dengan variabel bilangan, fungsi tersebut memodifikasi nilai bilangan secara langsung dengan menghitung kuadratnya, dan perubahan ini bersifat permanen setelah fungsi selesai dieksekusi.
 
 ## Referensi
 
