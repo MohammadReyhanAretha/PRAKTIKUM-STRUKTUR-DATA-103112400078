@@ -303,6 +303,6 @@ Program ini merupakan duplikat fungsional dari guided1 yang juga mendemonstrasik
 
 ## Referensi
 
-1. https://www.learncpp.com/ (diakses pada 27 september 2025)
-2. https://www.w3schools.com/cpp/ (diakses pada 27 september 2025)
-3. https://www.geeksforgeeks.org/cpp/ (diakses pada 27 september 2025)
+1. Pointers in C++ - GeeksforGeeks: https://www.geeksforgeeks.org/pointers-in-c/ (diakses pada 3 Oktober 2025)
+2. Passing arguments by value, reference, and address - learncpp.com: https://www.learncpp.com/cpp-tutorial/passing-arguments-by-reference/ (diakses pada 3 Oktober 2025)
+3. Pointers - CPlusPlus.com: http://www.cplusplus.com/doc/tutorial/pointers/ (diakses pada 3 Oktober 2025)
