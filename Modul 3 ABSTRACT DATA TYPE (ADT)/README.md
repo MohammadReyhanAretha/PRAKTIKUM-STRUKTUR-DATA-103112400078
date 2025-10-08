@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 2 <br> PENGENALAN BAHASA C++ (BAGIAN KEDUA)</h1>
+# <h1 align="center">Laporan Praktikum Modul 3 <br> ABSTRACT DATA TYPE</h1>
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
@@ -56,7 +56,7 @@ int main()
 ```
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/guided3.png)
+> ![Screenshot bagian x](OUTPUT/guided1.png)
 
 ini berisi fungsi main, yang merupakan titik masuk (entry point) dari keseluruhan program. Eksekusi kode selalu dimulai dari sini. Program ini menginstansiasi atau menciptakan sebuah variabel bernama mhs dari tipe struct mahasiswa. Selanjutnya, ia mengatur alur program dengan memanggil fungsi inputMhs untuk mengisi data ke dalam variabel mhs, kemudian memanggil fungsi rata2 untuk memproses data tersebut, dan terakhir menggunakan cout untuk menampilkan hasil akhir ke konsol. File ini bertugas menggunakan semua komponen yang telah dideklarasikan dan didefinisikan di file lain untuk menjalankan alur program yang spesifik dan mencapai tujuan akhir.
 
