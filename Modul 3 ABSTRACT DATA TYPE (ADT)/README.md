@@ -64,62 +64,171 @@ ini berisi fungsi main, yang merupakan titik masuk (entry point) dari keseluruha
 
 ### Soal 1
 
-Buatlah sebuah program untuk melakukan transpose pada sebuah matriks persegi berukuran 3x3. Operasi transpose adalah mengubah baris menjadi kolom dan sebaliknya. Inisialisasi matriks awal di dalam kode, kemudian buat logika untuk melakukan transpose dan simpan hasilnya ke dalam matriks baru. Terakhir, tampilkan matriks awal dan matriks hasil transpose.
+Buat program yang dapat menyimpan data mahasiswa (max. 10) ke dalam sebuah array
+dengan field nama, nim, uts, uas, tugas, dan nilai akhir. Nilai akhir diperoleh dari FUNGSI
+dengan rumus 0.3*uts+0.4*uas+0.3*tugas.
 
+### unguided1.h
 ```c++
-#include <iostream>
+#ifndef MAHASISWA_H
+#define MAHASISWA_H
+
+#include <string>
 using namespace std;
 
-int main()
-{
-    int matrix[3][3] = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
-    };
-    
-    cout << "Matriks Awal:" << endl;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
+class Mahasiswa {
+private:
+    string nama;
+    string nim;
+    float uts;
+    float uas;
+    float tugas;
+    float nilaiAkhir;
 
-    cout << "Matriks Transpose:" << endl;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            cout << matrix[j][i] << " ";
+public:
+    Mahasiswa();
+    void inputData();
+    void hitungNilaiAkhir();
+    void tampilkanData() const;
+};
+
+#endif // MAHASISWA_H
+```
+### unguided1.cpp
+```c++
+#include "unguided1.h"
+#include <iostream>
+#include <limits>
+using namespace std;
+
+Mahasiswa::Mahasiswa() : uts(0), uas(0), tugas(0), nilaiAkhir(0) {}
+
+void Mahasiswa::inputData() {
+    cout << "Nama      : ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, nama);
+
+    cout << "NIM       : ";
+    cin >> nim;
+
+    cout << "Nilai UTS : ";
+    cin >> uts;
+
+    cout << "Nilai UAS : ";
+    cin >> uas;
+
+    cout << "Nilai Tugas: ";
+    cin >> tugas;
+}
+
+void Mahasiswa::hitungNilaiAkhir() {
+    nilaiAkhir = (0.3 * uts) + (0.4 * uas) + (0.3 * tugas);
+}
+
+void Mahasiswa::tampilkanData() const {
+    cout << "Nama        : " << nama << endl;
+    cout << "NIM         : " << nim << endl;
+    cout << "Nilai Akhir : " << nilaiAkhir << endl;
+}
+```
+### main.cpp
+```c++
+#include "unguided1.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    Mahasiswa daftarMahasiswa[10];
+    int jumlahMahasiswa = 0;
+    char lanjut;
+
+    do {
+        if (jumlahMahasiswa >= 10) {
+            cout << "Kapasitas maksimal mahasiswa telah tercapai." << endl;
+            break;
         }
-        cout << endl; 
-    }
+
+        cout << "\nMasukkan Data Mahasiswa ke-" << jumlahMahasiswa + 1 << ":" << endl;
+        
+        daftarMahasiswa[jumlahMahasiswa].inputData();
+        daftarMahasiswa[jumlahMahasiswa].hitungNilaiAkhir();
+
+        jumlahMahasiswa++;
+
+        cout << "\nTambah data lagi? (y/n): ";
+        cin >> lanjut;
+
+    } while (lanjut == 'y' || lanjut == 'Y');
+
+    cout << "\n===== Data Lengkap Mahasiswa =====" << endl;
     
+    for (int i = 0; i < jumlahMahasiswa; ++i) {
+        cout << "----------------------------------" << endl;
+        daftarMahasiswa[i].tampilkanData();
+    }
+    cout << "----------------------------------" << endl;
+
     return 0;
 }
 ```
-
 > Output
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
-Kode ini juga bertujuan menukar nilai dua variabel, tetapi menggunakan metode call by reference yang lebih modern di C++. Fungsi tukar menerima parameter sebagai referensi (int &x, int &y), yang membuatnya menjadi alias atau nama lain untuk variabel a dan b yang dilewatkan. Dengan demikian, setiap perubahan pada x dan y di dalam fungsi secara otomatis akan mengubah nilai asli dari a dan b di fungsi main tanpa perlu menggunakan sintaks pointer.
+Program ini berfungsi sebagai sistem sederhana untuk mendata nilai mahasiswa. Kodenya menggunakan sebuah struct atau class untuk merepresentasikan data setiap mahasiswa, yang mencakup nama, NIM, serta nilai UTS, UAS, dan Tugas. Saat dijalankan, program masuk ke dalam sebuah loop yang memungkinkan pengguna memasukkan data untuk satu atau lebih mahasiswa. Setelah data diinput, sebuah fungsi dipanggil untuk menghitung Nilai Akhir berdasarkan rumus tertentu. Seperti yang terlihat pada output, setelah pengguna selesai memasukkan data untuk "Reyhan Aretha" dan memilih untuk tidak melanjutkan (n), program kemudian menampilkan kembali data lengkap mahasiswa tersebut beserta hasil kalkulasi Nilai Akhirnya, yaitu 90.7.
 
 ### Soal 2
 
-Buatlah program yang menunjukkan penggunaan call by reference. Buat sebuah prosedur bernama kuadratkan yang menerima satu parameter integer secara referensi (&). Prosedur ini akan mengubah nilai asli variabel yang dilewatkan dengan nilai kuadratnya. Tampilkan nilai variabel di main() sebelum dan sesudah memanggil prosedur untuk membuktikan perubahannya.
+> ![Screenshot bagian x](OUTPUT/soal2.png)
 
+### unguided2.h
 ```c++
-#include <iostream>
+#ifndef PELAJARAN_H
+#define PELAJARAN_H
 
-void kuadratkan(int& angka) {
-    angka = angka * angka;
+#include <string>
+using namespace std;
+
+class Pelajaran {
+private:
+    string namaMapel;
+    string kodeMapel;
+
+public:
+    Pelajaran(string nama, string kode);
+    void tampilkanInfo() const;
+};
+
+#endif 
+```
+### unguided2.cpp
+```c++
+#include "unguided2.h"
+#include <iostream>
+using namespace std;
+
+Pelajaran::Pelajaran(string nama, string kode) {
+    namaMapel = nama;
+    kodeMapel = kode;
 }
 
+void Pelajaran::tampilkanInfo() const {
+    cout << "nama pelajaran: " << namaMapel << endl;
+    cout << "kode: " << kodeMapel << endl;
+}
+```
+### main.cpp
+```c++
+#include "unguided2.h"
+#include <iostream>
+using namespace std;
+
 int main() {
-    int bilangan = 5;
-    std::cout << "Nilai awal: " << bilangan << std::endl;
-    kuadratkan(bilangan);
-    std::cout << "Nilai setelah dikuadratkan: " << bilangan << std::endl;
+    Pelajaran pel("Struktur Data", "STD");
+
+    pel.tampilkanInfo();
+
     return 0;
 }
 ```
@@ -128,10 +237,123 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Program ini merupakan duplikat fungsional dari guided1 yang juga mendemonstrasikan call by reference. Sebuah fungsi bernama kuadratkan didefinisikan untuk menerima referensi ke sebuah variabel integer angka. Ketika fungsi kuadratkan dipanggil dari main dengan variabel bilangan, fungsi tersebut memodifikasi nilai bilangan secara langsung dengan menghitung kuadratnya, dan perubahan ini bersifat permanen setelah fungsi selesai dieksekusi.
+Program ini merupakan contoh sederhana dari pembuatan dan penampilan sebuah objek data. Kode ini mendefinisikan sebuah struct atau class untuk "Pelajaran" yang memiliki dua atribut: nama pelajaran dan kode pelajaran. Pada fungsi main, program secara langsung membuat sebuah objek "Pelajaran" dan menginisialisasinya dengan nilai "Struktur Data" dan "STD" tanpa meminta input dari pengguna. Setelah objek berhasil dibuat, program memanggil sebuah fungsi untuk menampilkannya. Output yang dihasilkan sesuai dengan proses tersebut, yaitu hanya menampilkan dua baris informasi dari objek yang telah dibuat secara hardcoded.
+
+### Soal 3
+
+Buatlah program dengan ketentuan :
+- 2 buah array 2D integer berukuran 3x3 dan 2 buah pointer integer
+- fungsi/prosedur yang menampilkan isi sebuah array integer 2D
+- fungsi/prosedur yang akan menukarkan isi dari 2 array integer 2D pada posisi tertentu
+- fungsi/prosedur yang akan menukarkan isi dari variabel yang ditunjuk oleh 2 buah pointer
+
+### unguided2.h
+```c++
+#ifndef MATRIX_H
+#define MATRIX_H
+
+#include <iostream>
+
+class Matrix {
+private:
+    int data[3][3];
+
+public:
+    Matrix(int arr[3][3]);
+    void tampilkan() const;
+    void tukarElemen(Matrix& other, int baris, int kolom);
+};
+
+void tukarNilaiPointer(int* ptr1, int* ptr2);
+
+#endif
+```
+### unguided2.cpp
+```c++
+#include "unguided3.h"
+
+Matrix::Matrix(int arr[3][3]) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            data[i][j] = arr[i][j];
+        }
+    }
+}
+
+void Matrix::tampilkan() const {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            std::cout << data[i][j] << "\t";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Matrix::tukarElemen(Matrix& other, int baris, int kolom) {
+    if (baris >= 0 && baris < 3 && kolom >= 0 && kolom < 3) {
+        int temp = this->data[baris][kolom];
+        this->data[baris][kolom] = other.data[baris][kolom];
+        other.data[baris][kolom] = temp;
+    }
+}
+
+void tukarNilaiPointer(int* ptr1, int* ptr2) {
+    int temp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = temp;
+}
+```
+### main.cpp
+```c++
+#include "unguided3.h"
+#include <iostream>
+
+int main() {
+    using namespace std;
+
+    int dataA[3][3] = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
+    int dataB[3][3] = { {10, 20, 30}, {40, 50, 60}, {70, 80, 90} };
+
+    Matrix matA(dataA);
+    Matrix matB(dataB);
+
+    cout << " Matrix Sebelum Ditukar " << endl;
+    cout << "Matrix A:" << endl;
+    matA.tampilkan();
+    cout << "\nMatrix B:" << endl;
+    matB.tampilkan();
+
+    matA.tukarElemen(matB, 1, 1);
+
+    cout << "\n Matrix Setelah Ditukar " << endl;
+    cout << "Matrix A:" << endl;
+    matA.tampilkan();
+    cout << "\nMatrix B:" << endl;
+    matB.tampilkan();
+    
+    cout << "\n================================\n" << endl;
+
+    int var1 = 100;
+    int var2 = 200;
+
+    cout << "Nilai pointer sebelum ditukar: " << var1 << " & " << var2 << endl;
+    
+    tukarNilaiPointer(&var1, &var2);
+    
+    cout << "Nilai pointer setelah ditukar: " << var1 << " & " << var2 << endl;
+    
+    return 0;
+}
+```
+
+> Output
+> 
+> ![Screenshot bagian x](OUTPUT/unguided3.png)
+
+Program ini mendemonstrasikan dua konsep utama: pertukaran elemen antar-array 2D (matriks) dan pertukaran nilai melalui pointer. Kode ini pertama-tama membuat dan menampilkan dua matriks 3x3, yaitu Matriks A dan B. Kemudian, sebuah fungsi dipanggil untuk menukar elemen pada posisi tengah ([1][1]) dari kedua matriks tersebut, yang terlihat dari output di mana nilai 5 (dari A) dan 50 (dari B) saling bertukar posisi. Bagian kedua program menunjukkan cara kerja fungsi yang menerima dua pointer. Fungsi ini menukar nilai yang ditunjuk oleh pointer tersebut, bukan alamat pointernya. Hal ini terbukti pada output terakhir, di mana nilai variabel yang awalnya 100 dan 200 berhasil ditukar menjadi 200 dan 100.
 
 ## Referensi
 
-1. Pointers in C++ - GeeksforGeeks: https://www.geeksforgeeks.org/pointers-in-c/ (diakses pada 3 Oktober 2025)
-2. Passing arguments by value, reference, and address - learncpp.com: https://www.learncpp.com/cpp-tutorial/passing-arguments-by-reference/ (diakses pada 3 Oktober 2025)
-3. Pointers - CPlusPlus.com: http://www.cplusplus.com/doc/tutorial/pointers/ (diakses pada 3 Oktober 2025)
+1. PGeeksforGeeks - Abstract Data Types: https://www.geeksforgeeks.org/abstract-data-types/ (diakses pada 9 Oktober 2025)
+2. University of Waterloo - Abstract Data Types (ADT): https://cs.uwaterloo.ca/~a23gao/cs136_s21/notes/10-adt.pdf (diakses pada 9 Oktober 2025)
+3. TutorialsPoint - Data Structures - Abstract Data Types: https://www.tutorialspoint.com/data_structures_algorithms/abstract_data_type.htm (diakses pada 9 Oktober 2025)
