@@ -174,7 +174,7 @@ int main() {
 ```
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/unguided1fx.png)
+> ![Screenshot bagian x](OUTPUT/unguided1ifx.png)
 
 Program ini berfungsi sebagai sistem sederhana untuk mendata nilai mahasiswa. Kodenya menggunakan sebuah struct atau class untuk merepresentasikan data setiap mahasiswa, yang mencakup nama, NIM, serta nilai UTS, UAS, dan Tugas. Saat dijalankan, program masuk ke dalam sebuah loop yang memungkinkan pengguna memasukkan data untuk satu atau lebih mahasiswa. Setelah data diinput, sebuah fungsi dipanggil untuk menghitung Nilai Akhir berdasarkan rumus tertentu. Seperti yang terlihat pada output, setelah pengguna selesai memasukkan data untuk "Reyhan Aretha" dan memilih untuk tidak melanjutkan (n), program kemudian menampilkan kembali data lengkap mahasiswa tersebut beserta hasil kalkulasi Nilai Akhirnya, yaitu 90.7.
 
