@@ -347,77 +347,49 @@ struct Node {
     Node* next;
 };
 
-class LinkedList {
-private:
-    Node* head;
+void insert(Node** head_ref, int new_data) {
+    Node* new_node = new Node();
+    new_node->data = new_data;
+    new_node->next = (*head_ref);
+    (*head_ref) = new_node;
+}
 
-    Node* reverseRecursive(Node* current) {
-        if (current == nullptr || current->next == nullptr) {
-            return current;
-        }
-
-        Node* newHead = reverseRecursive(current->next);
-
-        current->next->next = current;
-        current->next = nullptr;
-
-        return newHead;
+void display(Node* node) {
+    while (node != nullptr) {
+        cout << node->data << " -> ";
+        node = node->next;
     }
+    cout << "NULL" << endl;
+}
 
-public:
-    LinkedList() : head(nullptr) {}
+void reverse(Node** head_ref) {
+    Node* prev = nullptr;
+    Node* current = *head_ref;
+    Node* next = nullptr;
 
-    ~LinkedList() {
-        Node* current = head;
-        while (current != nullptr) {
-            Node* nextNode = current->next;
-            delete current;
-            current = nextNode;
-        }
+    while (current != nullptr) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
     }
-
-    void insertBelakang(int data) {
-        Node* newNode = new Node{data, nullptr};
-        if (!head) {
-            head = newNode;
-        } else {
-            Node* temp = head;
-            while (temp->next) temp = temp->next;
-            temp->next = newNode;
-        }
-    }
-
-    void tampilkan() {
-        Node* temp = head;
-        while (temp) {
-            cout << temp->data << " -> ";
-            temp = temp->next;
-        }
-        cout << "NULL\n";
-    }
-
-    void reverse() {
-        if (head != nullptr) {
-            head = reverseRecursive(head);
-        }
-    }
-};
+    *head_ref = prev;
+}
 
 int main() {
-    LinkedList list;
+    Node* head = nullptr;
 
-    list.insertBelakang(1);
-    list.insertBelakang(2);
-    list.insertBelakang(3);
+    insert(&head, 3);
+    insert(&head, 2);
+    insert(&head, 1);
 
+    cout << "List Awal: " << endl;
+    display(head);
 
-    cout << "List Awal:\n";
-    list.tampilkan();
+    reverse(&head);
 
-    list.reverse();
-
-    cout << "\nList Setelah Dibalik (Rekursif):\n";
-    list.tampilkan();
+    cout << "\nList Setelah Dibalik: " << endl;
+    display(head);
 
     return 0;
 }
