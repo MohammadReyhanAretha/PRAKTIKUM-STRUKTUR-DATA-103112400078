@@ -399,8 +399,6 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Tentu, ini penjelasannya dalam satu paragraf.
-
 Program C++ ini menunjukkan cara canggih untuk membalik urutan sebuah *singly linked list* dengan menggunakan pendekatan **rekursif**. Pada dasarnya, program ini pertama-tama membuat sebuah list sederhana dengan urutan `1 -> 2 -> 3`. Kemudian, fungsi `reverse` dipanggil, yang secara rekursif akan "menyelam" hingga ke node paling akhir. Dari titik akhir tersebut, ia mulai bekerja mundur ke atas, membalikkan arah setiap sambungan (`pointer`) satu per satu, sehingga node yang tadinya menunjuk ke node berikutnya kini berbalik menunjuk ke node sebelumnya. Proses ini secara efektif mengubah node terakhir menjadi `head` (kepala) yang baru dan membalik seluruh urutan list, menghasilkan output akhir `3 -> 2 -> 1`.
 
 ## Referensi
