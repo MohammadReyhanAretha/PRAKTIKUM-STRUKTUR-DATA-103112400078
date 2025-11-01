@@ -285,7 +285,7 @@ int main() {
 #### OUTPUT & DEKSRIPSI PROGRAM
 > Output soal 1
 > 
-> ![Screenshot bagian x](OUTPUT/unguided1.1.png)
+> ![Screenshot bagian x](OUTPUT/unguided1.png)
 
 Program implementasi stack berbasis array. Program membuat stack S1 dan melakukan serangkaian operasi: push(3), push(4), push(8), pop() (menghapus 8), push(2), push(3), pop() (menghapus 3), dan terakhir push(9). Fungsi printInfo(S1) kemudian mencetak isi stack dari atas ke bawah, menghasilkan [TOP] 9 2 4 3. Setelah itu, fungsi balikStack(S1) dipanggil, yang membalik urutan elemen dalam stack. Pemanggilan printInfo(S1) yang kedua kalinya menunjukkan stack yang telah dibalik: [TOP] 3 4 2 9.
 > Output soal 2
