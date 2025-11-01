@@ -94,7 +94,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-Program C++ ini adalah implementasi dari struktur data doubly linked list, yang memungkinkan penyimpanan data integer di mana setiap elemen (disebut Node) terhubung ke elemen sebelum (prev) dan sesudahnya (next). Program ini menyediakan fungsionalitas penuh untuk mengelola daftar tersebut melalui menu interaktif: pengguna dapat menambahkan data baru ke awal daftar (insertDepan), ke akhir (insertBelakang), atau setelah data tertentu (insertSetelah). Selain itu, program ini juga mendukung penghapusan data dari awal (hapusDepan), dari akhir (hapusBelakang), atau menghapus data spesifik di mana pun dalam daftar (hapusData). Terdapat pula fungsi untuk memperbarui nilai data yang sudah ada (updateData) serta dua opsi untuk menampilkan keseluruhan isi daftar, baik dari urutan depan ke belakang (tampilDepan) maupun dari belakang ke depan (tampilBelakang), yang semuanya dikendalikan melalui pilihan menu di konsol hingga pengguna memilih untuk keluar.
+program yang mengimplementasikan stack menggunakan linked list. Program melakukan push 10, 20, dan 30. Saat show(stack) dipanggil pertama kali, stack dicetak dengan benar sebagai TOP -> 30 -> 20 -> 10 -> NULL. Namun, pada baris cout << "pop: " <<(stack) <<endl;, terjadi kesalahan di mana program mencetak alamat memori dari pointer stack (misalnya 0xa1f6eff8), bukan memanggil fungsi pop(stack) untuk mengeluarkan elemen. Akibatnya, tidak ada elemen yang dihapus dari stack. Oleh karena itu, ketika show(stack) dipanggil untuk kedua kalinya, isi stack ditampilkan tetap utuh seperti semula: TOP -> 30 -> 20 -> 10 -> NULL.
 
 ## UNGUIDED
 
@@ -287,25 +287,24 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.1.png)
 
-Program C++ ini adalah sebuah implementasi dari doubly linked list yang dirancang khusus untuk mengelola data kendaraan. Setiap kendaraan disimpan sebagai sebuah node yang berisi infotype berupa nomor polisi (string nopol), warna (string warna), dan tahun pembuatan (int thnBuat). Program utama (main.cpp) menyediakan menu interaktif yang memungkinkan pengguna untuk melakukan beberapa operasi: (1) memasukkan data kendaraan baru, yang akan ditambahkan ke akhir daftar (insertLast) setelah memvalidasi bahwa nomor polisi tersebut belum terdaftar; (2) mencari kendaraan berdasarkan nomor polisi (findElm) dan menampilkan detailnya jika ditemukan; (3) menghapus kendaraan berdasarkan nomor polisi (menggunakan fungsi hapusKendaraan yang secara cerdas memanggil deleteFirst atau deleteAfter); dan (4) menampilkan semua data kendaraan yang ada, di mana fungsi printInfo secara khusus mencetak daftar tersebut dalam urutan terbalik (dari data terakhir yang dimasukkan ke data pertama) dengan menelusuri pointer prev.
-
+Program implementasi stack berbasis array. Program membuat stack S1 dan melakukan serangkaian operasi: push(3), push(4), push(8), pop() (menghapus 8), push(2), push(3), pop() (menghapus 3), dan terakhir push(9). Fungsi printInfo(S1) kemudian mencetak isi stack dari atas ke bawah, menghasilkan [TOP] 9 2 4 3. Setelah itu, fungsi balikStack(S1) dipanggil, yang membalik urutan elemen dalam stack. Pemanggilan printInfo(S1) yang kedua kalinya menunjukkan stack yang telah dibalik: [TOP] 3 4 2 9.
 > Output soal 2
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-menunjukkan pengguna memilih menu 2, yaitu "cari data kendaraan". Program kemudian merespons dengan meminta "masukkan nomor polisi yang dicari:", dan pengguna mengetikkan D001 sebagai target pencarian. Ini memicu pemanggilan fungsi P = findElm(L, target). Fungsi findElm kemudian menelusuri list mulai dari L.First ke depan, membandingkan P->info.nopol dengan target "D001". Karena data "D001" (yang dimasukkan pada gambar unguided1.1.png) ditemukan dalam list, fungsi findElm mengembalikan address P dari node tersebut, yang berarti P tidak Nil. Akibatnya, kondisi if (P != Nil) di main.cpp terpenuhi, dan program mencetak "data ditemukan:" diikuti oleh rincian data yang tersimpan di P->info, yaitu nomor polisi D001, warna hitam, dan tahun 90.
+Program yang menggunakan fungsi pushAscending. Fungsi ini memastikan setiap elemen yang dimasukkan (3, 4, 8, 2, 3, 9) ke stack S2 akan menjaga stack tetap terurut, dengan elemen terkecil berada di posisi top. Setiap kali push, elemen baru disisipkan ke posisi yang benar dengan memindahkan elemen yang lebih besar ke stack sementara lalu mengembalikannya. Hasil cetakan pertama printInfo(S2) menunjukkan stack yang terurut [TOP] 2 3 3 4 8 9 (2 adalah elemen teratas). Kemudian, balikStack(S2) membalik urutan stack ini, sehingga hasil cetakan kedua adalah [TOP] 9 8 4 3 3 2, yang kini terurut dengan elemen terbesar di atas.
 
 > Output soal 3
 > 
-> ![Screenshot bagian x](OUTPUT/unguided2.png)
+> ![Screenshot bagian x](OUTPUT/unguided3.png)
 > 
-ini mendemonstrasikan eksekusi dari menu 3, yaitu "hapus data kendaraan". Pengguna diminta untuk memasukkan nomor polisi yang akan dihapus, dan mereka mengetikkan D004. Ini memanggil fungsi hapusKendaraan dengan target "D004". Fungsi ini pertama-tama menggunakan findElm untuk menemukan node yang berisi "D004". Berdasarkan konteks dari gambar sebelumnya, "D004" adalah data terakhir yang dimasukkan, sehingga ia adalah L.Last dalam list. Karena node ini bukan elemen pertama (L.First), fungsi hapusKendaraan mengambil node sebelumnya (precNode, yaitu "D003") dan memanggil deleteAfter(L, precNode, temp). Di dalam deleteAfter, program mendeteksi bahwa node yang akan dihapus (Prec->next) adalah L.Last, sehingga ia memanggil fungsi deleteLast(L, temp). deleteLast kemudian memperbarui L.Last untuk menunjuk ke node "D003", mengatur pointer next dari "D003" menjadi Nil, dan mengembalikan node "D004" yang telah terputus. Akhirnya, hapusKendaraan mencetak pesan sukses "data dengan nomor polisi D004 berhasil dihapus" dan memanggil dealokasi(temp) untuk membebaskan memori node tersebut.
+Program yang menguji fungsi getInputStream. Setelah "Hello world!" tercetak, program menunggu input pengguna. Pengguna memasukkan 4729601, yang ditampilkan di layar. Fungsi getInputStream membaca input ini karakter per karakter dan langsung melakukan push setiap digit ke stack S3. Karena stack bersifat LIFO (Last-In, First-Out), digit '1' yang terakhir dimasukkan menjadi elemen top. Cetakan printInfo(S3) pertama menunjukkan isi stack dalam urutan terbalik dari input: [TOP] 1 0 6 9 2 7 4. Terakhir, fungsi balikStack(S3) dipanggil, membalikkan stack kembali ke urutan aslinya, yang dicetak sebagai [TOP] 4 7 2 9 6 0 1.
 
 
 
 
 ## Referensi
 
-1. https://www.geeksforgeeks.org/cpp/doubly-linked-list-in-cpp/ (diakses pada 23 Oktober 2025)
-2. https://www.programiz.com/dsa/doubly-linked-list (diakses pada 23 Oktober 2025)
-3. https://www.tutorialspoint.com/cplusplus-program-to-implement-doubly-linked-list (diakses pada 23 Oktober 2025)
+1. https://www.geeksforgeeks.org/stack-data-structure/ (diakses pada 1 November 2025)
+2. https://www.programiz.com/dsa/stack (diakses pada 1 November 2025)
+3. https://www.tutorialspoint.com/data_structures_algorithms/stack_algorithm.htm (diakses pada 1 November 2025)
