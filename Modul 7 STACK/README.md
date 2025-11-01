@@ -2,6 +2,11 @@
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
+Stack (Tumpukan) adalah salah satu bentuk struktur data linier yang menerapkan prinsip operasi LIFO (Last In First Out). Sesuai dengan namanya, "tumpukan", data yang terakhir kali dimasukkan adalah data yang akan pertama kali dikeluarkan. Bayangkan sebuah tumpukan piring; Anda hanya bisa menambah piring baru di atas (paling atas) dan mengambil piring dari atas (paling atas). Titik akses tunggal dalam stack ini disebut sebagai "Top"
+
+Terdapat dua operasi utama dalam stack. Operasi pertama adalah Push, yaitu proses menyisipkan atau menambahkan elemen baru ke dalam tumpukan. Elemen baru ini akan selalu ditempatkan di posisi Top. Operasi kedua adalah Pop, yaitu proses mengambil atau mengeluarkan elemen dari tumpukan. Elemen yang diambil pastilah elemen yang berada di posisi Top.
+
+Stack dapat diimplementasikan menggunakan dua cara: pointer (seperti singly linked list) atau tabel (menggunakan array). Dalam implementasi menggunakan tabel/array, stack memiliki jumlah tumpukan yang terbatas, yang ditentukan oleh ukuran maksimum array (Imax). Indikator Top digunakan sebagai indeks array untuk menandai posisi data teratas. Saat stack kosong, Top biasanya diinisialisasi ke 0 (atau -1, tergantung konvensi). Operasi Push dilakukan dengan menambah nilai Top (Top = Top + 1) lalu memasukkan data ke array pada indeks Top tersebut. Sebaliknya, operasi Pop dilakukan dengan mengambil data pada indeks Top, kemudian mengurangi nilai Top (TOP = TOP - 1).
 
 ## Guided
 
