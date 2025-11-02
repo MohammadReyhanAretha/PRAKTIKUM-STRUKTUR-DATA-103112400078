@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 6 <br>STACK</h1>
+# <h1 align="center">Laporan Praktikum Modul 7 <br>STACK</h1>
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
