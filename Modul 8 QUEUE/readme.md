@@ -1,13 +1,16 @@
-# <h1 align="center">Laporan Praktikum Modul 7 <br>STACK</h1>
+# <h1 align="center">Laporan Praktikum Modul 8 <br>QUEUE</h1>
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
-Stack (Tumpukan) adalah salah satu bentuk struktur data linier yang menerapkan prinsip operasi LIFO (Last In First Out). Sesuai dengan namanya, "tumpukan", data yang terakhir kali dimasukkan adalah data yang akan pertama kali dikeluarkan. Bayangkan sebuah tumpukan piring; Anda hanya bisa menambah piring baru di atas (paling atas) dan mengambil piring dari atas (paling atas). Titik akses tunggal dalam stack ini disebut sebagai "Top"
+Queue (antrean) adalah struktur data yang merepresentasikan konsep antrean dalam dunia nyata, seperti antrean pada loket pembelian tiket kereta api. Prinsip dasar yang digunakan dalam Queue adalah First In First Out (FIFO), yang berarti elemen atau data yang pertama kali masuk ke dalam antrean akan menjadi yang pertama kali dilayani atau diakses, sedangkan yang terakhir masuk akan dilayani paling akhir. Dalam struktur ini, terdapat dua operasi utama, yaitu operasi penyisipan (Insert atau Enqueue) dan operasi pengambilan (Delete atau Dequeue). Sesuai prinsip FIFO, proses penyisipan elemen (Enqueue) selalu dilakukan pada bagian belakang (Tail), sedangkan proses penghapusan elemen (Dequeue) hanya dilakukan pada bagian depan (Head).
 
-Terdapat dua operasi utama dalam stack. Operasi pertama adalah Push, yaitu proses menyisipkan atau menambahkan elemen baru ke dalam tumpukan. Elemen baru ini akan selalu ditempatkan di posisi Top. Operasi kedua adalah Pop, yaitu proses mengambil atau mengeluarkan elemen dari tumpukan. Elemen yang diambil pastilah elemen yang berada di posisi Top.
+Implementasi Queue dalam bahasa C dapat dilakukan menggunakan dua pendekatan utama, yaitu menggunakan tipe data linked list dan tipe data array (tabel). Pada implementasi menggunakan linked list, operasi yang dilakukan sebenarnya mirip dengan operasi list biasa namun lebih sederhana karena aturan penambahan dan penghapusan elemen yang ketat pada posisi Head dan Tail. Implementasi ini dapat diterapkan baik pada Singly Linked List maupun Doubly Linked List, dan memiliki kelebihan berupa jumlah antrean yang tidak terbatas secara teoritis karena adanya manajemen memori yang dinamis.
 
-Stack dapat diimplementasikan menggunakan dua cara: pointer (seperti singly linked list) atau tabel (menggunakan array). Dalam implementasi menggunakan tabel/array, stack memiliki jumlah tumpukan yang terbatas, yang ditentukan oleh ukuran maksimum array (Imax). Indikator Top digunakan sebagai indeks array untuk menandai posisi data teratas. Saat stack kosong, Top biasanya diinisialisasi ke 0 (atau -1, tergantung konvensi). Operasi Push dilakukan dengan menambah nilai Top (Top = Top + 1) lalu memasukkan data ke array pada indeks Top tersebut. Sebaliknya, operasi Pop dilakukan dengan mengambil data pada indeks Top, kemudian mengurangi nilai Top (TOP = TOP - 1).
-
+Selain linked list, Queue juga dapat direpresentasikan menggunakan tabel (array). Perbedaan mendasar representasi tabel dibandingkan pointer adalah adanya keterbatasan jumlah antrean (jumlah elemen terbatas) serta manajemen memori yang berbeda. Dalam representasi tabel, terdapat tiga alternatif mekanisme pengelolaan indeks:
+1. Alternatif 1: Head selalu berada di indeks awal (biasanya 1 atau 0) jika tidak kosong, dan elemen digeser maju saat terjadi penghapusan. Cara ini mencerminkan antrean nyata namun tidak efisien karena             memerlukan pergeseran elemen.
+2. Alternatif 2: Head dan Tail sama-sama bergerak. Head maju saat elemen dihapus, sehingga tidak perlu menggeser elemen (lebih efisien). Namun, cara ini dapat menyebabkan kondisi "penuh semu" di mana Tail mencapai batas maksimum indeks meskipun masih ada ruang kosong di bagian depan.
+3. Alternatif 3 (Circular Buffer): Head dan Tail bergerak memutar (circular). Jika Tail mencapai batas maksimum indeks, penambahan berikutnya akan memutar kembali ke indeks awal. Metode ini efisien karena tidak memerlukan pergeseran elemen dan mengatasi masalah "penuh semu".
+   
 ## Guided
 
 ### Guided 1
@@ -15,76 +18,91 @@ Stack dapat diimplementasikan menggunakan dua cara: pointer (seperti singly link
 #include <iostream>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *next;
+#define MAX 5 // ukuran maksimal queue
+
+// Struktur Queue
+struct Queue {
+    int data[MAX];
+    int head;
+    int tail;
 };
 
-bool isEmpty(Node *top)
-{
-    return top == nullptr;
+// Membuat antrean kosong
+void createQueue(Queue &Q) {
+    Q.head = -1;
+    Q.tail = -1;
 }
 
-void push(Node *&top, int data)
-{
-    Node *newNode = new Node();
-    newNode->data = data;
-    newNode->next = top;
-    top = newNode;
+bool isEmpty(Queue Q) {
+    return (Q.head == -1 && Q.tail == -1);
 }
 
-int pop(Node *&top)
-{
-    if (isEmpty(top))
-    {
-        cout << "Stack kosong, tidak bisa pop!" << endl;
-        return 0;
+bool isFull(Queue Q) {
+    return (Q.tail == MAX - 1);
+}
+
+// Menampilkan isi antrian
+void printQueue(Queue Q) {
+    if (isEmpty(Q)) {
+        cout << "Queue kosong!" << endl;
+    } else {
+        cout << "Queue : ";
+        for (int i = Q.head; i <= Q.tail; i++) {
+            cout << Q.data[i] << " ";
+        }
+        cout << endl;
     }
-
-    int poppedData = top->data;
-    Node *temp = top;
-    top = top->next;
-    
-    delete temp;
-    return poppedData;
 }
 
-void show(Node *top)
-{
-    if (isEmpty(top))
-    {
-        cout << "Stack kosong." << endl;
-        return;
+void enqueue(Queue &Q, int x) {
+    if (isFull(Q)) {
+        cout << "Queue penuh! Tidak bisa menambah data." << endl;
+    } else {
+        if (isEmpty(Q)) {
+            Q.head = Q.tail = 0;
+        } else {
+            Q.tail++;
+        }
+        Q.data[Q.tail] = x;
+        cout << "Enqueue: " << x << endl;
     }
-
-    cout << "TOP -> ";
-    Node *temp = top;
-
-    while (temp != nullptr)
-    {
-        cout << temp->data << " -> ";
-        temp = temp->next;
-    }
-
-    cout << "NULL" << endl;
 }
 
-int main()
-{
-    Node*stack = nullptr;
+void dequeue(Queue &Q) {
+    if (isEmpty(Q)) {
+        cout << "Queue kosong! Tidak ada data yang dihapus." << endl;
+    } else {
+        cout << "Dequeue: " << Q.data[Q.head] << endl;
+        // Jika hanya 1 elemen
+        if (Q.head == Q.tail) {
+            Q.head = Q.tail = -1;
+        } else {
+            // Geser semua elemen ke kiri
+            for (int i = Q.head; i < Q.tail; i++) {
+                Q.data[i] = Q.data[i + 1];
+            }
+            Q.tail--;
+        }
+    }
+}
 
-    push(stack, 10);
-    push(stack, 20);
-    push(stack, 30);
-    
-    cout << "menampilkan isi stack: " << endl;
-    show(stack);
+int main() {
+    Queue Q;
+    enqueue(Q, 5);
+    enqueue(Q, 2);
+    enqueue(Q, 7);
+    printQueue(Q);
 
-    cout << "pop: " <<(stack) <<endl;
+    dequeue(Q);
+    printQueue(Q);
 
-    cout << "menampilkan sisa stack: " << endl;
-    show(stack);
+    enqueue(Q, 4);
+    enqueue(Q, 9);
+    printQueue(Q);
+
+    dequeue(Q);
+    dequeue(Q);
+    printQueue(Q);
 
     return 0;
 }
@@ -94,7 +112,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-program yang mengimplementasikan stack menggunakan linked list. Program melakukan push 10, 20, dan 30. Saat show(stack) dipanggil pertama kali, stack dicetak dengan benar sebagai TOP -> 30 -> 20 -> 10 -> NULL. Namun, pada baris cout << "pop: " <<(stack) <<endl;, terjadi kesalahan di mana program mencetak alamat memori dari pointer stack (misalnya 0xa1f6eff8), bukan memanggil fungsi pop(stack) untuk mengeluarkan elemen. Akibatnya, tidak ada elemen yang dihapus dari stack. Oleh karena itu, ketika show(stack) dipanggil untuk kedua kalinya, isi stack ditampilkan tetap utuh seperti semula: TOP -> 30 -> 20 -> 10 -> NULL.
+Program ini mengimplementasikan struktur data Queue menggunakan array statis dengan mekanisme di mana posisi Head (elemen terdepan) selalu dipertahankan pada indeks ke-0 selama antrean tidak kosong. Dalam implementasi ini, operasi penambahan data (enqueue) dilakukan dengan menaikkan indeks Tail dan menempatkan data baru di posisi tersebut. Namun, operasi pengambilan data (dequeue) memiliki karakteristik khusus; ketika elemen pada Head diambil, program melakukan proses pergeseran (shifting) terhadap seluruh elemen tersisa di belakangnya agar maju satu posisi ke depan untuk mengisi kekosongan indeks ke-0. Akibatnya, Tail akan berkurang satu setiap kali dequeue dilakukan. Meskipun metode ini secara visual mencerminkan antrean dunia nyata di mana orang bergeser maju, secara komputasi metode ini kurang efisien karena memerlukan looping untuk menggeser elemen setiap kali terjadi penghapusan.
 
 ## UNGUIDED
 
@@ -102,209 +120,424 @@ program yang mengimplementasikan stack menggunakan linked list. Program melakuka
 
 > ![Screenshot bagian x](OUTPUT/SOAL1.png)
 
-### Soal 2
-
-> ![Screenshot bagian x](OUTPUT/SOAL2.png)
-
-### Soal 3
-
-> ![Screenshot bagian x](OUTPUT/SOAL3.png)
-
-### JAWABAN NOMOR 1,2,3
-
-#### stack.h
+#### queue.h
 ```c++
-#ifndef STACK_H
-#define STACK_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include <iostream>
-#define MAX_STACK 20 
+#include <iomanip> // Sertakan untuk std::setw
+using namespace std;
 
+const int NMax = 5;
 typedef int infotype;
 
-struct Stack {
-    infotype info[MAX_STACK + 1]; 
-    int top;
+struct Queue {
+    infotype info[NMax];
+    int head;
+    int tail;
 };
-void createStack(Stack &S);
-bool isEmpty(Stack S);
-bool isFull(Stack S);
-void push(Stack &S, infotype x);
-infotype pop(Stack &S);
-void printInfo(Stack S);
-void balikStack(Stack &S);
-void pushAscending(Stack &S, infotype x);
-void getInputStream(Stack &S);
+
+void createQueue(Queue &Q);
+bool isEmptyQueue(Queue Q);
+bool isFullQueue(Queue Q);
+void enqueue(Queue &Q, infotype x);
+void dequeue(Queue &Q);
+void printInfo(Queue Q);
 
 #endif
 ```
-#### stack.cpp
+#### queue.cpp
 ```c++
-#include "stack.h"
-#include <iostream> 
+#include "queue.h"
 
-using namespace std; 
-
-void createStack(Stack &S) {
-    S.top = 0;
+void createQueue(Queue &Q) {
+    Q.head = -1;
+    Q.tail = -1;
 }
 
-bool isEmpty(Stack S) {
-    return S.top == 0;
+bool isEmptyQueue(Queue Q) {
+    return (Q.head == -1 && Q.tail == -1);
 }
-bool isFull(Stack S) {
-    return S.top == MAX_STACK;
+
+bool isFullQueue(Queue Q) {
+    return (Q.tail == NMax - 1);
 }
-void push(Stack &S, infotype x) {
-    if (!isFull(S)) {
-        S.top++; 
-        S.info[S.top] = x;
+
+void enqueue(Queue &Q, infotype x) {
+    if (isFullQueue(Q)) {
+        cout << "Antrean Penuh" << endl;
     } else {
-        cout << "Stack penuh!" << endl;
-    }
-}
-infotype pop(Stack &S) {
-    if (!isEmpty(S)) {
-        infotype x = S.info[S.top];
-        S.top--; 
-        return x;
-    } else {
-        cout << "Stack kosong!" << endl; 
-        return -1; 
-    }
-}
-
-void printInfo(Stack S) {
-    cout << "[TOP] "; 
-    for (int i = S.top; i >= 1; i--) {
-        cout << S.info[i] << " "; 
-    }
-    cout << endl; 
-}
-
-void balikStack(Stack &S) {
-    Stack temp1, temp2;
-    createStack(temp1);
-    createStack(temp2);
-
-    while (!isEmpty(S)) {
-        push(temp1, pop(S));
-    }
-    while (!isEmpty(temp1)) {
-        push(temp2, pop(temp1));
-    }
-    while (!isEmpty(temp2)) {
-        push(S, pop(temp2));
-    }
-}
-
-void pushAscending(Stack &S, infotype x) {
-    Stack temp;
-    createStack(temp);
-    while (!isEmpty(S) && x > S.info[S.top]) {
-        push(temp, pop(S));
-    }
-    push(S, x);
-    while (!isEmpty(temp)) {
-        push(S, pop(temp));
-    }
-}
-
-void getInputStream(Stack &S) {
-    char c;
-    c = cin.get(); 
-    while (c != '\n') {
-        if (c >= '0' && c <= '9') {
-            push(S, c - '0');
+        if (isEmptyQueue(Q)) {
+            Q.head = 0;
+            Q.tail = 0;
+            Q.info[0] = x;
+        } else {
+            Q.tail++;
+            Q.info[Q.tail] = x;
         }
-        c = cin.get(); 
+    }
+}
+
+void dequeue(Queue &Q) {
+    if (isEmptyQueue(Q)) {
+        cout << "Antrean Kosong" << endl;
+    } else {
+        if (Q.head == Q.tail) {
+            createQueue(Q);
+        } else {
+            for (int i = 0; i < Q.tail; i++) {
+                Q.info[i] = Q.info[i + 1];
+            }
+            Q.tail--;
+        }
+    }
+}
+
+void printInfo(Queue Q) {
+    if (isEmptyQueue(Q)) {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | empty queue" << endl;
+    } else {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | ";
+        for (int i = Q.head; i <= Q.tail; i++) {
+            cout << Q.info[i];
+            if (i < Q.tail) {
+                cout << " ";
+            }
+        }
+        cout << endl;
     }
 }
 ```
 #### main.cpp
 ```c++
-#include "stack.h"
-#include <iostream>
-
-using namespace std;
+#include "queue.h"
 
 int main() {
+    cout << "Hello world!" << endl;
+    Queue Q;
+
+    createQueue(Q);
     
-    // Latihan 1
-    cout << "Hello world!" << endl; 
-    Stack S1;
-    createStack(S1); 
-    push(S1, 3);     
-    push(S1, 4);     
-    push(S1, 8);     
-    pop(S1);         
-    push(S1, 2);     
-    push(S1, 3);     
-    pop(S1);         
-    push(S1, 9);     
-    printInfo(S1);   
-    cout << "balik stack" << endl; 
-    balikStack(S1);  
-    printInfo(S1);   
-
-    cout << endl; 
-
-    // Latihan 2
-    cout << "Hello world!" << endl; 
-    Stack S2;
-    createStack(S2); 
-    pushAscending(S2, 3); 
-    pushAscending(S2, 4); 
-    pushAscending(S2, 8); 
-    pushAscending(S2, 2); 
-    pushAscending(S2, 3); 
-    pushAscending(S2, 9); 
-    printInfo(S2); 
-    cout << "balik stack" << endl; 
-    balikStack(S2); 
-    printInfo(S2); 
-
-    cout << endl; 
-
-    // Latihan 3
-    cout << "Hello world!" << endl; 
-    Stack S3;
-    createStack(S3); 
+    cout << "---------------------------" << endl;
+    cout << " H - T : Queue Info" << endl;
+    cout << "---------------------------" << endl;
     
-    cin.sync(); 
+    printInfo(Q);
     
-    getInputStream(S3); 
-    printInfo(S3); 
-    cout << "balik stack" << endl; 
-    balikStack(S3); 
-    printInfo(S3); 
-
-    return 0; 
+    enqueue(Q, 5);
+    printInfo(Q);
+    
+    enqueue(Q, 2);
+    printInfo(Q);
+    
+    enqueue(Q, 7);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    enqueue(Q, 4);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    return 0;
 }
 ```
-#### OUTPUT & DEKSRIPSI PROGRAM
 > Output soal 1
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
 Program implementasi stack berbasis array. Program membuat stack S1 dan melakukan serangkaian operasi: push(3), push(4), push(8), pop() (menghapus 8), push(2), push(3), pop() (menghapus 3), dan terakhir push(9). Fungsi printInfo(S1) kemudian mencetak isi stack dari atas ke bawah, menghasilkan [TOP] 9 2 4 3. Setelah itu, fungsi balikStack(S1) dipanggil, yang membalik urutan elemen dalam stack. Pemanggilan printInfo(S1) yang kedua kalinya menunjukkan stack yang telah dibalik: [TOP] 3 4 2 9.
+
+### Soal 2
+Buatlah implementasi ADT Queue pada file “queue.cpp” dengan menerapkan mekanisme
+queue Alternatif 2 (head bergerak, tail bergerak).
+#### queue.h
+```c++
+#ifndef QUEUE_H
+#define QUEUE_H
+
+#include <iostream>
+#include <iomanip> // Sertakan untuk std::setw
+using namespace std;
+
+const int NMax = 5;
+typedef int infotype;
+
+struct Queue {
+    infotype info[NMax];
+    int head;
+    int tail;
+};
+
+void createQueue(Queue &Q);
+bool isEmptyQueue(Queue Q);
+bool isFullQueue(Queue Q);
+void enqueue(Queue &Q, infotype x);
+void dequeue(Queue &Q);
+void printInfo(Queue Q);
+
+#endif
+```
+#### queue.cpp
+```c++
+#include "queue.h"
+
+void createQueue(Queue &Q) {
+    Q.head = -1;
+    Q.tail = -1;
+}
+
+bool isEmptyQueue(Queue Q) {
+    return (Q.head == -1 && Q.tail == -1);
+}
+
+bool isFullQueue(Queue Q) {
+    return (Q.tail == NMax - 1);
+}
+
+void enqueue(Queue &Q, infotype x) {
+    if (isFullQueue(Q)) {
+        cout << "Antrean Penuh" << endl;
+    } else {
+        if (isEmptyQueue(Q)) {
+            Q.head = 0;
+            Q.tail = 0;
+        } else {
+            Q.tail++;
+        }
+        Q.info[Q.tail] = x;
+    }
+}
+
+void dequeue(Queue &Q) {
+    if (isEmptyQueue(Q)) {
+        cout << "Antrean Kosong" << endl;
+    } else {
+        if (Q.head == Q.tail) {
+            createQueue(Q);
+        } else {
+            Q.head++;
+        }
+    }
+}
+
+// FUNGSI YANG DIPERBARUI
+void printInfo(Queue Q) {
+    if (isEmptyQueue(Q)) {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | empty queue" << endl;
+    } else {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | ";
+        for (int i = Q.head; i <= Q.tail; i++) {
+            cout << Q.info[i];
+            if (i < Q.tail) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+```
+#### main.cpp
+```c++
+#include "queue.h"
+
+int main() {
+    cout << "Hello world!" << endl;
+    Queue Q;
+
+    createQueue(Q);
+    
+    cout << "---------------------------" << endl;
+    cout << " H - T : Queue Info" << endl;
+    cout << "---------------------------" << endl;
+    
+    printInfo(Q);
+    
+    enqueue(Q, 5);
+    printInfo(Q);
+    
+    enqueue(Q, 2);
+    printInfo(Q);
+    
+    enqueue(Q, 7);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    enqueue(Q, 4);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    return 0;
+}
+```
+
 > Output soal 2
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Program yang menggunakan fungsi pushAscending. Fungsi ini memastikan setiap elemen yang dimasukkan (3, 4, 8, 2, 3, 9) ke stack S2 akan menjaga stack tetap terurut, dengan elemen terkecil berada di posisi top. Setiap kali push, elemen baru disisipkan ke posisi yang benar dengan memindahkan elemen yang lebih besar ke stack sementara lalu mengembalikannya. Hasil cetakan pertama printInfo(S2) menunjukkan stack yang terurut [TOP] 2 3 3 4 8 9 (2 adalah elemen teratas). Kemudian, balikStack(S2) membalik urutan stack ini, sehingga hasil cetakan kedua adalah [TOP] 9 8 4 3 3 2, yang kini terurut dengan elemen terbesar di atas.
+Program ini menggunakan pendekatan di mana penunjuk Head dan Tail sama-sama bergerak maju (increment) seiring dengan operasi penyisipan dan penghapusan, tanpa melakukan pergeseran elemen fisik dalam array . Saat operasi enqueue dilakukan, Tail bergerak maju mengisi slot kosong berikutnya, dan saat operasi dequeue dilakukan, Head bergerak maju meninggalkan indeks sebelumnya. Strategi ini jauh lebih efisien dibandingkan Alternatif 1 karena operasi penghapusan data dapat dilakukan secara instan tanpa perlu menggeser elemen lain. Akan tetapi, metode ini memiliki kelemahan berupa kondisi "penuh semu" (false full), yaitu situasi di mana antrean dianggap penuh karena indeks Tail telah mencapai batas maksimum array, padahal sebenarnya masih terdapat ruang kosong di bagian depan array (indeks awal) yang sudah ditinggalkan oleh pergerakan Head .
+
+### Soal 3
+Buatlah implementasi ADT Queue pada file “queue.cpp” dengan menerapkan mekanisme
+queue Alternatif 3 (head dan tail berputar).
+#### queue.h
+```c++
+#ifndef QUEUE_H
+#define QUEUE_H
+
+#include <iostream>
+#include <iomanip> // Sertakan untuk std::setw
+using namespace std;
+
+const int NMax = 5;
+typedef int infotype;
+
+struct Queue {
+    infotype info[NMax];
+    int head;
+    int tail;
+};
+
+void createQueue(Queue &Q);
+bool isEmptyQueue(Queue Q);
+bool isFullQueue(Queue Q);
+void enqueue(Queue &Q, infotype x);
+void dequeue(Queue &Q);
+void printInfo(Queue Q);
+
+#endif
+```
+#### queue.cpp
+```c++
+#include "queue.h"
+
+void createQueue(Queue &Q) {
+    Q.head = -1;
+    Q.tail = -1;
+}
+
+bool isEmptyQueue(Queue Q) {
+    return (Q.head == -1 && Q.tail == -1);
+}
+
+bool isFullQueue(Queue Q) {
+    return ((Q.tail + 1) % NMax == Q.head);
+}
+
+void enqueue(Queue &Q, infotype x) {
+    if (isFullQueue(Q)) {
+        cout << "Antrean Penuh" << endl;
+    } else {
+        if (isEmptyQueue(Q)) {
+            Q.head = 0;
+            Q.tail = 0;
+        } else {
+            Q.tail = (Q.tail + 1) % NMax;
+        }
+        Q.info[Q.tail] = x;
+    }
+}
+
+void dequeue(Queue &Q) {
+    if (isEmptyQueue(Q)) {
+        cout << "Antrean Kosong" << endl;
+    } else {
+        if (Q.head == Q.tail) {
+            createQueue(Q);
+        } else {
+            Q.head = (Q.head + 1) % NMax;
+        }
+    }
+}
+
+void printInfo(Queue Q) {
+    if (isEmptyQueue(Q)) {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | empty queue" << endl;
+    } else {
+        cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | ";
+        int i = Q.head;
+        while (true) {
+            cout << Q.info[i];
+            if (i == Q.tail) break;
+            cout << " ";
+            i = (i + 1) % NMax;
+        }
+        cout << endl;
+    }
+}
+```
+#### main.cpp
+```c++
+#include "queue.h"
+
+int main() {
+    cout << "Hello world!" << endl;
+    Queue Q;
+
+    createQueue(Q);
+    
+    cout << "---------------------------" << endl;
+    cout << " H - T : Queue Info" << endl;
+    cout << "---------------------------" << endl;
+    
+    printInfo(Q);
+    
+    enqueue(Q, 5);
+    printInfo(Q);
+    
+    enqueue(Q, 2);
+    printInfo(Q);
+    
+    enqueue(Q, 7);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    enqueue(Q, 4);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    dequeue(Q);
+    printInfo(Q);
+    
+    return 0;
+}
+```
 
 > Output soal 3
 > 
 > ![Screenshot bagian x](OUTPUT/unguided3.png)
 > 
-Program yang menguji fungsi getInputStream. Setelah "Hello world!" tercetak, program menunggu input pengguna. Pengguna memasukkan 4729601, yang ditampilkan di layar. Fungsi getInputStream membaca input ini karakter per karakter dan langsung melakukan push setiap digit ke stack S3. Karena stack bersifat LIFO (Last-In, First-Out), digit '1' yang terakhir dimasukkan menjadi elemen top. Cetakan printInfo(S3) pertama menunjukkan isi stack dalam urutan terbalik dari input: [TOP] 1 0 6 9 2 7 4. Terakhir, fungsi balikStack(S3) dipanggil, membalikkan stack kembali ke urutan aslinya, yang dicetak sebagai [TOP] 4 7 2 9 6 0 1.
-
-
-
+Program ini menerapkan konsep Circular Buffer (antrean melingkar) untuk mengoptimalkan penggunaan memori array dan mengatasi kelemahan "penuh semu" pada Alternatif 2. Dalam implementasi ini, indeks array diperlakukan seolah-olah tersambung secara memutar; jika Head atau Tail mencapai batas maksimum indeks array, penunjuk tersebut akan kembali ke indeks awal (0) asalkan slot tersebut kosong . Logika perputaran ini diimplementasikan menggunakan operasi matematika modulus. Dengan mekanisme ini, ruang kosong yang terjadi akibat operasi dequeue di bagian depan array dapat segera digunakan kembali untuk enqueue data baru tanpa memerlukan pergeseran elemen. Ini menjadikan Alternatif 3 sebagai implementasi Queue berbasis array yang paling efisien dan efektif dalam manajemen memori .
 
 ## Referensi
 
-1. https://www.geeksforgeeks.org/stack-data-structure/ (diakses pada 1 November 2025)
-2. https://www.programiz.com/dsa/stack (diakses pada 1 November 2025)
-3. https://www.tutorialspoint.com/data_structures_algorithms/stack_algorithm.htm (diakses pada 1 November 2025)
+1. https://www.geeksforgeeks.org/cpp/cpp-program-to-implement-queue-using-array/ (diakses pada 14 November 2025)
+2. https://www.geeksforgeeks.org/dsa/introduction-to-circular-queue/ (diakses pada 14 November 2025)
+3. https://www.programiz.com/dsa/queue (diakses pada 14 November 2025)
