@@ -118,7 +118,7 @@ Program ini mengimplementasikan struktur data Queue menggunakan array statis den
 
 ### Soal 1
 
-> ![Screenshot bagian x](OUTPUT/SOAL1.png)
+> ![Screenshot bagian x](OUTPUT/soal1.png)
 
 #### queue.h
 ```c++
