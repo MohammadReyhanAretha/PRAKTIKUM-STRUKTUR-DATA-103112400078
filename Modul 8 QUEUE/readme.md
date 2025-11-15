@@ -112,7 +112,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-Program ini mengimplementasikan struktur data Queue menggunakan array statis dengan mekanisme di mana posisi Head (elemen terdepan) selalu dipertahankan pada indeks ke-0 selama antrean tidak kosong. Dalam implementasi ini, operasi penambahan data (enqueue) dilakukan dengan menaikkan indeks Tail dan menempatkan data baru di posisi tersebut. Namun, operasi pengambilan data (dequeue) memiliki karakteristik khusus; ketika elemen pada Head diambil, program melakukan proses pergeseran (shifting) terhadap seluruh elemen tersisa di belakangnya agar maju satu posisi ke depan untuk mengisi kekosongan indeks ke-0. Akibatnya, Tail akan berkurang satu setiap kali dequeue dilakukan. Meskipun metode ini secara visual mencerminkan antrean dunia nyata di mana orang bergeser maju, secara komputasi metode ini kurang efisien karena memerlukan looping untuk menggeser elemen setiap kali terjadi penghapusan.
+Program ini mengimplementasikan antrean (Queue) menggunakan Alternatif 1 (Metode Pergeseran). Implementasi ini menggunakan struct untuk menyimpan data array, head, dan tail. Sesuai dengan strategi Alternatif 1, head diasumsikan selalu berada di awal (indeks 0). Saat operasi dequeue dilakukan, program mengambil data di head, kemudian secara fisik menggeser semua elemen di belakangnya satu posisi ke depan menggunakan for loop, dan akhirnya mengurangi nilai tail (Q.tail--).
 
 ## UNGUIDED
 
@@ -256,7 +256,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
-Program implementasi stack berbasis array. Program membuat stack S1 dan melakukan serangkaian operasi: push(3), push(4), push(8), pop() (menghapus 8), push(2), push(3), pop() (menghapus 3), dan terakhir push(9). Fungsi printInfo(S1) kemudian mencetak isi stack dari atas ke bawah, menghasilkan [TOP] 9 2 4 3. Setelah itu, fungsi balikStack(S1) dipanggil, yang membalik urutan elemen dalam stack. Pemanggilan printInfo(S1) yang kedua kalinya menunjukkan stack yang telah dibalik: [TOP] 3 4 2 9.
+Program ini mengimplementasikan struktur data Queue menggunakan array statis dengan mekanisme di mana posisi Head (elemen terdepan) selalu dipertahankan pada indeks ke-0 selama antrean tidak kosong. Dalam implementasi ini, operasi penambahan data (enqueue) dilakukan dengan menaikkan indeks Tail dan menempatkan data baru di posisi tersebut. Namun, operasi pengambilan data (dequeue) memiliki karakteristik khusus; ketika elemen pada Head diambil, program melakukan proses pergeseran (shifting) terhadap seluruh elemen tersisa di belakangnya agar maju satu posisi ke depan untuk mengisi kekosongan indeks ke-0. Akibatnya, Tail akan berkurang satu setiap kali dequeue dilakukan. Meskipun metode ini secara visual mencerminkan antrean dunia nyata di mana orang bergeser maju, secara komputasi metode ini kurang efisien karena memerlukan looping untuk menggeser elemen setiap kali terjadi penghapusan.
 
 ### Soal 2
 Buatlah implementasi ADT Queue pada file “queue.cpp” dengan menerapkan mekanisme
