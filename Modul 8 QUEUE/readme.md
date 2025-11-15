@@ -126,7 +126,7 @@ Program ini mengimplementasikan antrean (Queue) menggunakan Alternatif 1 (Metode
 #define QUEUE_H
 
 #include <iostream>
-#include <iomanip> // Sertakan untuk std::setw
+#include <iomanip> 
 using namespace std;
 
 const int NMax = 5;
@@ -267,7 +267,7 @@ queue Alternatif 2 (head bergerak, tail bergerak).
 #define QUEUE_H
 
 #include <iostream>
-#include <iomanip> // Sertakan untuk std::setw
+#include <iomanip> 
 using namespace std;
 
 const int NMax = 5;
@@ -331,7 +331,6 @@ void dequeue(Queue &Q) {
     }
 }
 
-// FUNGSI YANG DIPERBARUI
 void printInfo(Queue Q) {
     if (isEmptyQueue(Q)) {
         cout << setw(2) << Q.head << " - " << setw(2) << Q.tail << " | empty queue" << endl;
@@ -406,7 +405,7 @@ queue Alternatif 3 (head dan tail berputar).
 #define QUEUE_H
 
 #include <iostream>
-#include <iomanip> // Sertakan untuk std::setw
+#include <iomanip> 
 using namespace std;
 
 const int NMax = 5;
