@@ -208,10 +208,6 @@ Program ini adalah implementasi BST komprehensif dalam satu file tunggal yang me
 
 ## UNGUIDED
 
-### Soal 1
-
-> ![Screenshot bagian x](OUTPUT/soal1.png)
-
 #### bstree.h
 ```c++
 #ifndef BSTREE_H
