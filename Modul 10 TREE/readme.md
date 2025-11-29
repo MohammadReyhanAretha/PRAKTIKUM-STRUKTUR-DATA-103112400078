@@ -357,7 +357,7 @@ int main() {
     return 0;
 }
 ```
-> Output soal 1
+> Output soal 1,2,3
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
