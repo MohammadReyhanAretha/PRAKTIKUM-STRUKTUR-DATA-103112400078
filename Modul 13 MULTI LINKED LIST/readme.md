@@ -132,7 +132,7 @@ int main()
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 Program ini merupakan implementasi dasar dari struktur data Multi Linked List yang menggunakan Singly Linked List baik untuk elemen Parent maupun Child. Setiap node Parent dirancang memiliki pointer khusus (childHead) yang menunjuk ke awal daftar node Child yang dimilikinya, membentuk relasi one-to-many. Fungsi utamanya mendemonstrasikan cara menambahkan data Parent baru, mencari Parent tertentu berdasarkan nama, dan menyisipkan data Child pada Parent tersebut. Output program memvisualisasikan hubungan hirarki ini dengan mencetak nama Parent diikuti oleh seluruh anak-anaknya secara berurutan (misalnya: Parent Node 1 -> Child Node A -> Child Node B).
 
-## UNGUIDED 3
+## UNGUIDED 1
 1. Perhatikan program 46 multilist.h, buat multilist.cpp untuk implementasi semua fungsi pada 
 multilist.h. Buat main.cpp untuk pemanggilan fungsi-fungsi tersebut.
 
@@ -507,7 +507,7 @@ int main() {
     return 0;
 }
 ```
-> Output soal 2
+> Output soal 1
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
