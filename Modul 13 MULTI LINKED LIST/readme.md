@@ -763,7 +763,7 @@ int main() {
 > Output soal 2
 >
 > 
-> ![Screenshot bagian x](OUTPUT/unguided2.1.png)
+> ![Screenshot bagian x](OUTPUT/unuguided2.1.png)
 > ![Screenshot bagian x](OUTPUT/unguided2.2.png)
 
 Program ini merupakan implementasi Abstract Data Type (ADT) menggunakan Doubly Linked List untuk menyimpan dan mengelola data mahasiswa yang kompleks, meliputi Nama, NIM, Jenis Kelamin, dan IPK. Setiap elemen dalam list saling terhubung melalui pointer next dan prev, memungkinkan operasi penelusuran data dua arah. Program utama dirancang untuk mendemonstrasikan manipulasi data melalui berbagai metode penyisipan (insert first, last, dan after) yang dikombinasikan dengan fungsi pencarian (find), sehingga data dapat disusun secara terurut (misalnya berdasarkan NIM) dan ditampilkan sesuai format laporan yang presisi.
