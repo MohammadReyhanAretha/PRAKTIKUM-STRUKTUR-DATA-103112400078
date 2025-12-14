@@ -2,7 +2,9 @@
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
+Multi Linked List didefinisikan sebagai sekumpulan list yang berbeda namun memiliki keterhubungan satu sama lain. Dalam struktur data ini, setiap elemen memiliki kemampuan untuk membentuk list tersendiri. Secara umum, struktur Multi Linked List membagi elemen-elemennya ke dalam dua peran utama, yaitu sebagai list induk (parent list) dan list anak (child list). Dalam implementasinya, list induk bertindak sebagai pengelola yang menunjuk pada sebuah list anak. Sebagai contoh, dalam kasus data kepegawaian, list pegawai berperan sebagai list induk yang memiliki pointer ke list anak, yang menyimpan data tanggungan atau anak dari pegawai tersebut.
 
+Operasi manipulasi data pada Multi Linked List memiliki prosedur yang bergantung pada relasi antara induk dan anak. Dalam operasi penambahan (insert) elemen anak, sistem harus terlebih dahulu mencari dan mengetahui posisi elemen induknya sebelum elemen anak baru dapat disisipkan. Hal yang sama berlaku pada operasi penghapusan (delete) elemen anak, di mana pointer harus menunjuk pada induk terlebih dahulu untuk mengetahui posisi elemen anak yang akan dihapus. Aturan yang lebih ketat berlaku pada penghapusan elemen induk; jika sebuah elemen induk dihapus, maka seluruh elemen anak yang terhubung dengan induk tersebut juga harus dihapus dari memori. Sedangkan untuk operasi penyisipan elemen induk, konsepnya serupa dengan operasi insert pada Singly, Doubly, maupun Circular Linked List biasa.
 ## Guided
 
 ### Guided 1
