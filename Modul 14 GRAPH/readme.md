@@ -2,9 +2,15 @@
 <p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
 
 ## Dasar Teori
-Graph didefinisikan sebagai himpunan tidak kosong yang terdiri dari node (disebut juga vertex) dan garis penghubung (disebut edge). Struktur data ini digunakan untuk merepresentasikan hubungan antar objek. Sebagai contoh sederhana dalam kehidupan sehari-hari, lokasi seperti "Tempat Kost" dan "Common Lab" dapat dianggap sebagai node (vertex), sedangkan jalan yang menghubungkan keduanya merepresentasikan edge.
+Graph adalah himpunan tidak kosong yang terdiri atas simpul-simpul (node atau vertex) dan garis-garis penghubung (edge) yang menghubungkan antar simpul. Graph digunakan untuk merepresentasikan hubungan antar objek, seperti jaringan jalan, koneksi komputer, atau hubungan antar kota. Berdasarkan arah garis penghubungnya, graph dibedakan menjadi graph berarah (directed graph) dan graph tidak berarah (undirected graph). Pada graph berarah, setiap edge memiliki arah tertentu dari satu node ke node lain, sedangkan pada graph tidak berarah, hubungan antar node bersifat dua arah tanpa penunjuk arah khusus.
 
-Secara umum, graph dibedakan menjadi dua jenis utama berdasarkan arah hubungannya. Pertama adalah Directed Graph (Graph Berarah), di mana setiap edge memiliki arah spesifik dari satu node ke node lainnya. Dalam representasi ini, jika Node A terhubung ke Node B, belum tentu Node B terhubung kembali ke Node A. Kedua adalah Undirected Graph (Graph Tidak Berarah), di mana edge menghubungkan node tanpa arah tertentu, sehingga hubungan bersifat dua arah (bidirectional). Selain itu, dua node dikatakan "bertetangga" jika keduanya dihubungkan langsung oleh sebuah edge.
+Dalam representasi data, graph dapat disimpan menggunakan matriks ketetanggaan (adjacency matrix) atau multi linked list. Matriks ketetanggaan menggunakan array dua dimensi untuk menyatakan keterhubungan antar node, sedangkan multi linked list lebih efisien secara memori karena sifatnya yang dinamis dan fleksibel untuk menambah atau menghapus node dan edge.
+
+Selain itu, terdapat beberapa algoritma penting yang digunakan untuk menelusuri graph, di antaranya Breadth First Search (BFS) dan Depth First Search (DFS). BFS melakukan penelusuran secara meluas dari simpul awal ke seluruh simpul yang berada pada tingkat yang sama sebelum berpindah ke tingkat berikutnya. Sebaliknya, DFS menelusuri graph secara mendalam dengan menjelajahi satu cabang hingga ke ujung sebelum kembali ke simpul sebelumnya untuk menjelajahi cabang lain.
+
+Dalam beberapa kasus, graph juga digunakan untuk menentukan urutan atau prioritas pekerjaan melalui metode Topological Sort, yang digunakan pada graph berarah tanpa siklus (Directed Acyclic Graph). Proses ini menyusun elemen-elemen dalam urutan linear berdasarkan hubungan ketergantungan antar node.
+
+Secara keseluruhan, struktur data graph memiliki peran penting dalam berbagai aplikasi seperti jaringan komputer, sistem transportasi, perencanaan proyek, dan pencarian jalur terpendek. Pada praktikum ini, implementasi graph menggunakan pendekatan multi linked list, yang memungkinkan pengelolaan data secara dinamis dan efisien dalam berbagai operasi seperti penambahan simpul, penghubungan antar simpul, serta penelusuran dengan BFS dan DFS.
 
 ## Guided
 
